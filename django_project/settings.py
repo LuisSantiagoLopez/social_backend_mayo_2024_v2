@@ -108,6 +108,11 @@ DATABASES = {
     )
 }
 
+# test database 
+DATABASES['default']['TEST'] = {
+    'NAME': 'test_social_backend_mayo_2024',
+    'MIRROR': 'default',
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
