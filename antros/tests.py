@@ -71,7 +71,7 @@ class AntroTests(TestCase):
             'latitude': 25.7617,
             'longitude': -80.1918
         }
-        response = self.client.post('/antros-list/', data, format='json')
+        response = self.client.post('/antros/antros-list/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         antro = Antro.objects.get(id=response.data['id'])
         self.assertEqual(antro.location, Point(-80.1918, 25.7617, srid=4326))
@@ -88,7 +88,7 @@ class AntroTests(TestCase):
             'latitude': 25.7617,
             'longitude': -80.1918
         }
-        response = self.client.put(f'/antros-list/{antro.id}/', data, format='json')
+        response = self.client.put(f'/antros/antros-list/{antro.id}/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         antro.refresh_from_db()
         self.assertEqual(antro.location, Point(-80.1918, 25.7617, srid=4326))
