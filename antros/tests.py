@@ -52,6 +52,26 @@ class AntroTests(TestCase):
                 category="Luxury",
                 cost="$$$",
                 location=Point(-80.1916, 25.7616, srid=4326)  # Close to test location
+            ),
+            Antro.objects.create(
+                user=cls.user1,
+                name="Antro 6",
+                description="Description for Antro 6",
+                contact="Contact 6",
+                approved=True,
+                category="Techno",
+                cost="$$",
+                location=Point(-80.1917, 25.7618, srid=4326)  # Close to test location
+            ),
+            Antro.objects.create(
+                user=cls.user1,
+                name="Antro 7",
+                description="Description for Antro 7",
+                contact="Contact 7",
+                approved=False,
+                category="Techno",
+                cost="$$",
+                location=Point(-80.1918, 25.7619, srid=4326)  # Close to test location
             )
         ]
         cls.antros_user2 = [
@@ -119,12 +139,12 @@ class AntroTests(TestCase):
     def test_antros_close(self):
         response = self.client.get('/antros/close/?latitude=25.7617&longitude=-80.1918')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 4)  # Adjust to match the actual number of close antros
+        self.assertEqual(len(response.data), 6)  # Adjust to match the actual number of close antros
 
     def test_antros_relevant(self):
         response = self.client.get('/antros/relevant/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)  # Adjust to match the actual number of relevant antros for user1
+        self.assertEqual(len(response.data), 4)  # Adjust to match the actual number of relevant antros for user1
 
 class MenuItemTests(TestCase):
     @classmethod
