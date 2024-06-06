@@ -93,6 +93,16 @@ class AntroTests(TestCase):
         antro.refresh_from_db()
         self.assertEqual(antro.location, Point(-80.1918, 25.7617, srid=4326))
 
+    def test_antros_close(self):
+        response = self.client.get('/antros/close/?latitude=25.7617&longitude=-80.1918')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)  # Assuming there are 2 antros close to the provided location
+
+    def test_antros_relevant(self):
+        response = self.client.get('/antros/relevant/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)  # Assuming user1 prefers "Techno" and has 1 relevant antro
+
 class MenuItemTests(TestCase):
     @classmethod
     def setUpTestData(cls):
