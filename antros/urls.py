@@ -8,9 +8,8 @@ router.register('antros-list', AntroViewSet)
 router.register('menu-items', MenuItemViewSet, basename='menuitem')
 router.register('reviews', ReviewViewSet)
 
-router.register('antros-close', antros_close)
-router.register('antros-relevant', antros_relevant)
-
 urlpatterns = [
     path('', include(router.urls)),
+    path('antros/close/', antros_close, name='antros-close'),
+    path('antros/relevant/', antros_relevant, name='antros-relevant'),
 ]
