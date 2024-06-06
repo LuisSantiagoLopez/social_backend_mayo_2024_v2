@@ -10,6 +10,6 @@ router.register('reviews', ReviewViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('antros/close/', antros_close, name='antros-close'),
-    path('antros/relevant/', antros_relevant, name='antros-relevant'),
+    path('close/', antros_close, name='antros-close'),
+    path('relevant/', antros_relevant, name='antros-relevant'),
 ]
