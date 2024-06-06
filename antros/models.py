@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings 
+from django.contrib.gis.db import models as gis_models
 
 
 class Antro(models.Model):
@@ -8,9 +9,10 @@ class Antro(models.Model):
     name = models.CharField(max_length=250)
     description = models.TextField()
     contact = models.CharField(max_length=250)
-    approved = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False) ### NOTA: IMPLEMENTAR 
     category = models.CharField(max_length=100)
     cost = models.CharField(max_length=3) # $ $$ or $$$
+    location = gis_models.PointField(null=True, blank=True)
 
     def __str__(self):
         return self.name

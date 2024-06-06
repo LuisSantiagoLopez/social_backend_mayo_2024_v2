@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from rest_framework.test import APIClient
 from rest_framework import status
+from django.contrib.gis.geos import Point
 from .models import Antro, MenuItem, Review
 
 User = get_user_model()
@@ -43,6 +44,10 @@ class AntroTests(TestCase):
             )
         ]
 
+    def setUp(self):
+        self.client = APIClient()
+        self.client.login(username='user1', password='password')
+
     def test_antros_content(self):
         for antro in self.antros_user1 + self.antros_user2:
             self.assertIsInstance(antro.name, str)
@@ -53,6 +58,40 @@ class AntroTests(TestCase):
             self.assertIsInstance(antro.cost, str)
             self.assertIn(antro.cost, ['$', '$$', '$$$'])
             self.assertEqual(str(antro), antro.name)
+
+    def test_create_antros_with_location(self):
+        data = {
+            'user': self.user1.id,
+            'name': 'Antro with Location',
+            'description': 'Description for Antro with Location',
+            'contact': 'Contact with Location',
+            'approved': True,
+            'category': 'Techno',
+            'cost': '$',
+            'latitude': 25.7617,
+            'longitude': -80.1918
+        }
+        response = self.client.post('/antros/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        antro = Antro.objects.get(id=response.data['id'])
+        self.assertEqual(antro.location, Point(-80.1918, 25.7617, srid=4326))
+
+    def test_update_antros_with_location(self):
+        antro = self.antros_user1[0]
+        data = {
+            'name': antro.name,
+            'description': antro.description,
+            'contact': antro.contact,
+            'approved': antro.approved,
+            'category': antro.category,
+            'cost': antro.cost,
+            'latitude': 25.7617,
+            'longitude': -80.1918
+        }
+        response = self.client.put(f'/antros/{antro.id}/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        antro.refresh_from_db()
+        self.assertEqual(antro.location, Point(-80.1918, 25.7617, srid=4326))
 
 class MenuItemTests(TestCase):
     @classmethod
