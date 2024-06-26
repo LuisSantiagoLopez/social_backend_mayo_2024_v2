@@ -158,6 +158,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ADDED FIELDS FOR CUSTOM USER MODEL
 AUTH_USER_MODEL = "accounts.CustomUser"
 
+# Custom Register Serializer
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
+}
+
 # MEDIA CONFIGURATION FOR IMAGE UPLOADS 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media/"
