@@ -23,11 +23,6 @@ class MenuItemViewSet(viewsets.ModelViewSet):
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
     
-    def get_queryset(self):
-        # Filter menu items by the specified antro in the URL
-        antro_id = self.kwargs.get('antro_pk')
-        return MenuItem.objects.filter(antro_id=antro_id)
-
     def perform_create(self, serializer):
         serializer.save()
 
