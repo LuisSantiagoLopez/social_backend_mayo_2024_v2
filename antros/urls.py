@@ -10,6 +10,8 @@ router.register('reviews', ReviewViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+
+    # Lllama antros/close/?longitude=<Número>&latitude=<Número>
     path('close/', antros_close, name='antros-close'),
     path('relevant/', antros_relevant, name='antros-relevant'),
 ]
