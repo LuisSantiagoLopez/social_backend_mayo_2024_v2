@@ -9,7 +9,6 @@ class IsAntroOwnerOrReadOnly(permissions.BasePermission):
             return True
         return obj.user == request.user
 
-
 class IsMenuItemAntroOwnerOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
         return request.user.is_authenticated

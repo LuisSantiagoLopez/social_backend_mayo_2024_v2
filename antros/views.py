@@ -9,14 +9,15 @@ from django.contrib.gis.db.models.functions import Distance
 from rest_framework import status
 from django.contrib.gis.geos import Point
 
-
 class AntroViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAntroOwnerOrReadOnly,)
-    queryset = Antro.objects.all()
     serializer_class = AntroSerializer
 
     def get_queryset(self):
         return Antro.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class MenuItemViewSet(viewsets.ModelViewSet):
     permission_classes = (IsMenuItemAntroOwnerOrReadOnly,)
