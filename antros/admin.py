@@ -3,7 +3,7 @@ from .models import Antro, MenuItem, Review
 
 @admin.register(Antro)
 class AntroAdmin(admin.ModelAdmin):
-    list_display = ('user', 'name', 'contact', 'approved', 'category', 'cost', 'location', 'image', 'description')
+    list_display = ('id','user', 'name', 'contact', 'approved', 'category', 'cost', 'location', 'image', 'description')
     list_filter = ('approved', 'category', 'cost', 'user')
     search_fields = ('name', 'contact', 'description', 'user__username', 'user__email')
     readonly_fields = ('location',)
