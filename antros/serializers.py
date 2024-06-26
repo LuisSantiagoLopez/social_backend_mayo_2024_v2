@@ -15,7 +15,7 @@ class AntroSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Antro
-        fields = ['id', 'user', 'image', 'name', 'description', 'contact', 'approved', 'category', 'cost', 'latitude', 'longitude', 'latitude_input', 'longitude_input']
+        fields = ['id', 'image', 'name', 'description', 'contact', 'approved', 'category', 'cost', 'latitude', 'longitude', 'latitude_input', 'longitude_input']
 
     def get_latitude(self, obj):
         return obj.location.y if obj.location else None
