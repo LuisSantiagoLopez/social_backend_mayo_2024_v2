@@ -15,17 +15,13 @@ class AntroViewSet(viewsets.ModelViewSet):
     serializer_class = AntroSerializer
 
     def perform_create(self, serializer):
+        # Set the user to the logged-in user on creation
         serializer.save(user=self.request.user)
-
-    def get_queryset(self):
-        return Antro.objects.filter(user=self.request.user)
 
 class MenuItemViewSet(viewsets.ModelViewSet):
     permission_classes = (IsMenuItemAntroOwnerOrReadOnly,)
+    queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
-
-    def get_queryset(self):
-        return MenuItem.objects.filter(antro__user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save()
