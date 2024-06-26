@@ -182,8 +182,8 @@ REST_FRAMEWORK = {
 
 # API DOCUMENTATION SETTINGS 
 SPECTACULAR_SETTINGS = {
-"TITLE": "Blog API Project",
-"DESCRIPTION": "A sample blog to learn abot DRF",
+"TITLE": "Social API",
+"DESCRIPTION": "Esta es la documentación básica del API que HyperPulseTechnologies desarrolló para Social. Este API deberá ser usado exclusivamente por la aplicación móvil de Social.",
 "VERSION": "1.0.0",
 }
 

@@ -41,7 +41,8 @@ urlpatterns = [
     ), # Register through /dj-rest-auth/registration/ and verify email through /dj-rest-auth/registration/account-confirm-email/<key>/ (not enabled)
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
     path('schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc',), 
-    path('schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui')
+    # Documentación de presentación de API en formato Swagger
+    path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui')
 ]
 
 if settings.DEBUG:
